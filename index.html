@@ -3,72 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> RANDOM GUESS </title>
+    <title>Random Guess</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('number.webp'); /* Ensure the path is correct */
+            background-size: cover;
+        }
+    </style>
 </head>
-<style>
-     body{
-        background-image: url(number.webp);
-        
-    }
-</style>
-
-   
-                                                                                               
 <body>
-    <div class="container text-center mt-4" style="font-family: fantasy; ">
+    <div class="container text-center mt-4" style="font-family: fantasy;">
         <div class="alert alert-danger" role="alert">
-            <h1>RANDOM GUESS</h1>
-          </div>
-          <div class="d-flex justify-content-center align-items-center" > 
+            <h1>Random Guess</h1>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
             <div class="card" style="width: 18rem;">
-            
-            <div class="card-body " style="box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);"  >
-                <img src="random.jpg" class="card-img-top shadow-lg p-3 mb-5 bg-body-tertiary rounded" alt="..." >
-              <h5 class="card-title">input your number between 1 to 100</h5>
-              <input type="number" class="font-control" id="user-input"> <br>
-              <button id="submit" class="btn btn-primary mt-2" onclick ="guess_num()">summit</button>
-              <button type="button" class="btn btn-success mt-2">reset</button>
-            </div> <br>
-            <div id="result"></div>
+                <img src="random.jpg" class="card-img-top shadow-lg p-3 mb-5 bg-body-tertiary rounded" alt="Random Image">
+                <div class="card-body" style="box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);">
+                    <h5 class="card-title">Input your number between 1 and 100</h5>
+                    <input type="number" class="form-control" id="user-input">
+                    <br>
+                    <button id="submit" class="btn btn-primary mt-2" onclick="guess_num()">Submit</button>
+                    <button type="button" class="btn btn-success mt-2" onclick="reset_game()">Reset</button>
+                </div>
+                <br>
+                <div id="result"></div>
             </div>
-          </div>
-
+        </div>
     </div>
     <script>
-         let randomnumber = Math.floor(Math.random()*101)
-            function guess_num(){
-                let result= document.getElementById("result")
-                let submit = document.getElementById("submit")
-            const guess = Number(document.getElementById('user-input').value)
-            console.log(guess)
-            if(guess === randomnumber){
-            result.textContent = 'Success'
-            result.className='alert alert-success'
-            submit.disabled = true
-            console.log('Success')
-           }
+        let randomNumber = Math.floor(Math.random() * 101);
 
-            else if(guess < randomnumber){
-                result.textContent='small'
-                result.classList="alert alert-danger"
+        function guess_num() {
+            let result = document.getElementById("result");
+            let submit = document.getElementById("submit");
+            const guess = Number(document.getElementById('user-input').value);
 
-                console.log('Small')
-
+            if (guess === randomNumber) {
+                result.textContent = 'Success';
+                result.className = 'alert alert-success';
+                submit.disabled = true;
+            } else if (guess < randomNumber) {
+                result.textContent = 'Too low';
+                result.className = 'alert alert-danger';
+            } else {
+                result.textContent = 'Too high';
+                result.className = 'alert alert-danger';
             }
-            else{
-                result.textContent='large'
-                result.className="alert alert-danger"
-                console.log('Large')
-            }
-            // console.log(randomnumber)
         }
 
-
-
+        function reset_game() {
+            randomNumber = Math.floor(Math.random() * 101);
+            document.getElementById('user-input').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('result').className = '';
+            document.getElementById('submit').disabled = false;
+        }
     </script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
